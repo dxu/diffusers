@@ -1325,17 +1325,17 @@ class DiffusionPipeline(ConfigMixin):
         ignore_patterns = None
 
         model_info_call_error: Optional[Exception] = None
-        if not local_files_only:
-            try:
-                info = model_info(
-                    pretrained_model_name,
-                    use_auth_token=use_auth_token,
-                    revision=revision,
-                )
-            except HTTPError as e:
-                logger.warn(f"Couldn't connect to the Hub: {e}.\nWill try to load from local cache.")
-                local_files_only = True
-                model_info_call_error = e  # save error to reraise it if model is not cached locally
+        # if not local_files_only:
+        #     try:
+        #         info = model_info(
+        #             pretrained_model_name,
+        #             use_auth_token=use_auth_token,
+        #             revision=revision,
+        #         )
+        #     except HTTPError as e:
+        #         logger.warn(f"Couldn't connect to the Hub: {e}.\nWill try to load from local cache.")
+        #         local_files_only = True
+        #         model_info_call_error = e  # save error to reraise it if model is not cached locally
 
         if not local_files_only:
             config_file = hf_hub_download(
